@@ -2,7 +2,7 @@
 /*
 Plugin Name: Royal Sentinel
 Description: Royal Sentinel is an all-in-one security and performance optimization toolkit designed to keep your WordPress site safe and lean.
-Version: 26.11.02
+Version: 26.11.07
 Author: Royal Technologies
 Author URI: https://www.royaltechbd.com
 Requires at least: 5.8
@@ -24,7 +24,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/database.php';
 
 if ( ! defined( 'ROYALSENTINEL_VERSION' ) ) {
     $plugin_data = get_file_data( __FILE__, array( 'version' => 'Version' ) );
-    define( 'ROYALSENTINEL_VERSION', !empty( $plugin_data['version'] ) ? $plugin_data['version'] : '26.11.02' );
+    define( 'ROYALSENTINEL_VERSION', !empty( $plugin_data['version'] ) ? $plugin_data['version'] : '26.11.07' );
 }
 
 define( 'ROYALSENTINEL_PLUGIN_FILE', __FILE__ );

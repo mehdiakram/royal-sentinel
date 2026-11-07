@@ -4,7 +4,7 @@ Tags: security, cloudflare, 2fa, optimization, hardening
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 26.11.02
+Stable tag: 26.11.07
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,10 @@ Yes, to use the Cloudflare specific features like IP List management and Custom 
 4. Performance tweaks and database optimization tools.
 
 == Changelog ==
+
+= 26.11.07 =
+* Migrated update server to GitHub Releases for faster and reliable automated updates.
+* Refactored update checker to load release manifests directly from GitHub.
 
 = 26.11.02 =
 * Fixed PHP Warning: "Cannot modify header information - headers already sent" in Security Headers module by verifying header status before removal.

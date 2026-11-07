@@ -2,7 +2,7 @@
 /**
  * Royal Sentinel Plugin Updater
  *
- * Handles checking for updates from a custom remote server.
+ * Handles checking for updates from a custom remote server or GitHub.
  *
  * @package Royal_Sentinel
  */
@@ -62,12 +62,19 @@ class Royal_Sentinel_Updater {
         $update_data = json_decode( wp_remote_retrieve_body( $response ) );
 
         if ( is_object( $update_data ) && version_compare( $this->current_version, $update_data->version, '<' ) ) {
+            $assets_url   = plugin_dir_url( $this->plugin_file ) . 'assets/images/';
+            $plugin_icons = ! empty( $update_data->icons ) ? (array) $update_data->icons : array(
+                '1x' => $assets_url . 'icon-128x128.png',
+                '2x' => $assets_url . 'icon-256x256.png',
+            );
+
             $transient->response[ $this->plugin_slug ] = (object) array(
                 'slug'        => basename( $this->plugin_slug, '.php' ),
                 'plugin'      => $this->plugin_slug,
                 'new_version' => $update_data->version,
                 'package'     => $update_data->download_url,
                 'url'         => $update_data->homepage,
+                'icons'       => $plugin_icons,
             );
         }
 
@@ -96,7 +103,13 @@ class Royal_Sentinel_Updater {
 
             if ( is_object( $update_data ) ) {
                 $plugin_data = get_plugin_data( $this->plugin_file );
-                $result      = (object) array(
+                $assets_url  = plugin_dir_url( $this->plugin_file ) . 'assets/images/';
+                $banners     = ! empty( $update_data->banners ) ? (array) $update_data->banners : array(
+                    'low'  => $assets_url . 'royal-sentinel-772x250.jpg',
+                    'high' => $assets_url . 'royal-sentinel-1544x500.jpg',
+                );
+
+                $result = (object) array(
                     'name'          => $plugin_data['Name'],
                     'slug'          => basename( $this->plugin_slug, '.php' ),
                     'version'       => $update_data->version,
@@ -104,7 +117,7 @@ class Royal_Sentinel_Updater {
                     'homepage'      => $update_data->homepage,
                     'download_link' => $update_data->download_url,
                     'sections'      => (array) ( $update_data->sections ?? array() ),
-                    'banners'       => (array) ( $update_data->banners ?? array() ),
+                    'banners'       => $banners,
                 );
             }
         }

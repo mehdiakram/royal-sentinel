@@ -45,6 +45,8 @@ jobs:
                     --exclude='dist' \
                     --exclude='package' \
                     --exclude='royal-sentinel' \
+                    --exclude='emergency-unblock.php' \
+                    --exclude='server-api' \
                     --exclude='composer.json' \
                     --exclude='composer.lock' \
                     --exclude='*.zip' \

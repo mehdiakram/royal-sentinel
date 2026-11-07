@@ -20,3 +20,6 @@ ehthumbs.db
 
 # Duplicate subfolder artifact (if present)
 /royal-sentinel/
+
+# Sensitive or Emergency debug tools
+emergency-unblock.php

@@ -1,0 +1,66 @@
+name: Build & Release WordPress Plugin
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Publish Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract Plugin Version
+        id: get_version
+        run: |
+          VERSION=$(grep -i "Version:" royal-sentinel.php | head -1 | awk -F': ' '{print $2}' | tr -d '\r\n ')
+          echo "Detected version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          
+          if [ -n "$GITHUB_REF_NAME" ] && [[ "$GITHUB_REF_NAME" == v* ]]; then
+            echo "tag=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
+          else
+            echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Package Plugin (WordPress Standard Structure)
+        run: |
+          mkdir -p build_dir/royal-sentinel
+          
+          # Copy all plugin files except git/ci and internal build directories
+          rsync -av --exclude='.git*' \
+                    --exclude='.github*' \
+                    --exclude='build_dir' \
+                    --exclude='dist' \
+                    --exclude='package' \
+                    --exclude='royal-sentinel' \
+                    --exclude='composer.json' \
+                    --exclude='composer.lock' \
+                    --exclude='*.zip' \
+                    ./ build_dir/royal-sentinel/
+          
+          cd build_dir
+          zip -r ../royal-sentinel.zip royal-sentinel/
+          cd ..
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_version.outputs.tag }}
+          name: Royal Sentinel v${{ steps.get_version.outputs.version }}
+          files: royal-sentinel.zip
+          make_latest: true
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

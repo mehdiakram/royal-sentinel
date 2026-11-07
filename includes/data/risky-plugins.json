@@ -1,0 +1,21 @@
+{
+  "known_risky": {
+    "file-manager": {
+      "reason": "Known security vulnerabilities in older versions",
+      "severity": "critical",
+      "recommendation": "Update to latest version or remove if not needed"
+    },
+    "wp-file-manager": {
+      "reason": "History of critical vulnerabilities",
+      "severity": "high",
+      "recommendation": "Use alternative file manager or keep updated"
+    },
+    "simple-file-list": {
+      "reason": "Potential file upload vulnerabilities",
+      "severity": "medium",
+      "recommendation": "Ensure latest version is installed"
+    }
+  },
+  "abandoned_threshold_months": 18,
+  "outdated_threshold_months": 12
+}

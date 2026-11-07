@@ -1,0 +1,302 @@
+# Royal Sentinel - WordPress Security Plugin
+# Copyright (C) 2024 Royal Technologies
+# This file is distributed under the same license as the Royal Sentinel plugin.
+# Royal Technologies <info@royaltechbd.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Royal Sentinel 1.0.0\n"
+"Report-Msgid-Bugs-To: info@royaltechbd.com\n"
+"POT-Creation-Date: 2024-01-12 22:00+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Royal Technologies <info@royaltechbd.com>\n"
+"Language-Team: Bengali\n"
+"Language: bn_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: views/cloudflare/geo-blocking.php
+msgid "Cloudflare Geo-Blocking"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Target Domain"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Select Domain"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Select a domain"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Configure Rule"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Block Action"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Block (Forbidden)"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Managed Challenge (Captcha) - Recommended"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "JS Challenge"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Select Countries"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Select All"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Clear All"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "0 selected"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "selected"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Deploy Rule"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Update Rule"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Active Rules"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Loading rules..."
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Checking Cloudflare..."
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Connected"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Warning"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Success"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Error"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Please select a target domain."
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Please select at least one country."
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Geo-Blocking rule deployed successfully!"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Geo-Blocking rule updated successfully!"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "AJAX request failed."
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Are you sure you want to delete this rule?"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Delete"
+msgstr ""
+
+#: views/cloudflare/geo-blocking.php
+msgid "Deleting..."
+msgstr ""
+
+#: views/cloudflare/rules.php
+msgid "Custom Firewall Rules (WAF)"
+msgstr ""
+
+#: views/cloudflare/rules.php
+msgid "Rule Strategy"
+msgstr ""
+
+#: views/cloudflare/rules.php
+msgid "Deploy Rule to Domain"
+msgstr ""
+
+#: views/cloudflare/rules.php
+msgid "Bulk Deploy to All Domains"
+msgstr ""
+
+#: views/cloudflare/rules.php
+msgid "Bulk Delete from All Domains"
+msgstr ""
+
+#: views/cloudflare/rules.php
+msgid "Rules"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Cloudflare API"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "About Us"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Developer"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Professional Web Development & Security Solutions"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Website"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Email"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Mobile"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Address"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Cloudflare Integration"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Enable API connection to manage firewall rules."
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Connection Mode"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Global API Key (Master Mode)"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "API Token (Single Site Mode)"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Cloudflare Email"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "API Key / Token"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Account ID"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "IP List ID (UUID)"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Test Connection"
+msgstr ""
+
+#: views/admin-settings.php
+msgid "Save Changes"
+msgstr ""
+
+#: includes/cloudflare-api.php
+msgid "Invalid action"
+msgstr ""
+
+#: includes/cloudflare-api.php
+msgid "API Error"
+msgstr ""
+
+#: includes/cloudflare-api.php
+msgid "No countries selected"
+msgstr ""
+
+#: includes/cloudflare-api.php
+msgid "Rule already exists"
+msgstr ""
+
+#: includes/cloudflare-api.php
+msgid "Invalid rule type"
+msgstr ""
+
+#: Common strings
+msgid "Thinking..."
+msgstr ""
+
+#: Common strings
+msgid "Please select a domain to view rules."
+msgstr ""
+
+#: Common strings
+msgid "No active rules found."
+msgstr ""
+
+#: Common strings
+msgid "Rule Name"
+msgstr ""
+
+#: Common strings
+msgid "Action"
+msgstr ""
+
+#: Common strings
+msgid "Target Countries"
+msgstr ""
+
+#: Common strings
+msgid "Status"
+msgstr ""
+
+#: Common strings
+msgid "Actions"
+msgstr ""
+
+#: Common strings
+msgid "Active"
+msgstr ""
+
+#: Common strings
+msgid "Paused"
+msgstr ""

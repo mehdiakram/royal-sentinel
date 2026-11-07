@@ -1,0 +1,13 @@
+{
+    "name": "royaltech/royal-sentinel",
+    "description": "Royal Sentinel WebAuthn Addon",
+    "type": "wordpress-plugin",
+    "require": {
+        "web-auth/webauthn-lib": "^3.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

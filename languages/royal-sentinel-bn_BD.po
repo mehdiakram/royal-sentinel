@@ -1,0 +1,365 @@
+# Bengali Translation for Royal Sentinel
+# Copyright (C) 2026 Royal Apps BD
+# This file is distributed under the same license as the Royal Sentinel plugin.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Royal Sentinel 26.01.19\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-19 19:00+0600\n"
+"PO-Revision-Date: 2026-01-19 19:00+0600\n"
+"Last-Translator: Royal Apps BD\n"
+"Language-Team: Bengali\n"
+"Language: bn_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# Honeypot - Main View
+msgid "Honeypot Protection"
+msgstr "হানিপট প্রটেকশন"
+
+msgid "Block spam bots using invisible honeypot traps and time-based validation."
+msgstr "অদৃশ্য হানিপট ট্র্যাপ এবং সময়-ভিত্তিক যাচাইকরণ ব্যবহার করে স্প্যাম বট ব্লক করুন।"
+
+msgid "Settings"
+msgstr "সেটিংস"
+
+msgid "Integrations"
+msgstr "ইন্টিগ্রেশন"
+
+msgid "Statistics"
+msgstr "পরিসংখ্যান"
+
+msgid "IP Blocking"
+msgstr "আইপি ব্লকিং"
+
+msgid "Logs"
+msgstr "লগ"
+
+msgid "Settings Saved!"
+msgstr "সেটিংস সেভ হয়েছে!"
+
+msgid "Honeypot settings updated successfully."
+msgstr "হানিপট সেটিংস সফলভাবে আপডেট হয়েছে।"
+
+msgid "Integrations Saved!"
+msgstr "ইন্টিগ্রেশন সেভ হয়েছে!"
+
+# Settings Tab
+msgid "General Settings"
+msgstr "সাধারণ সেটিংস"
+
+msgid "Honeypot Field Name"
+msgstr "হানিপট ফিল্ড নাম"
+
+msgid "Regenerate"
+msgstr "পুনরায় তৈরি করুন"
+
+msgid "Unique field name for honeypot trap. Regenerate periodically for extra security."
+msgstr "হানিপট ট্র্যাপের জন্য অনন্য ফিল্ড নাম। অতিরিক্ত সুরক্ষার জন্য পর্যায়ক্রমে পুনরায় তৈরি করুন।"
+
+msgid "Error Message"
+msgstr "এরর মেসেজ"
+
+msgid "Message shown to blocked spam bots (humans won't see this)."
+msgstr "ব্লক করা স্প্যাম বটগুলিতে দেখানো বার্তা (মানুষ এটি দেখবে না)।"
+
+msgid "Disable Test Widget"
+msgstr "টেস্ট উইজেট বন্ধ করুন"
+
+msgid "Hide test widget below forms (only visible to admins)"
+msgstr "ফর্মের নিচে টেস্ট উইজেট লুকান (শুধুমাত্র অ্যাডমিনদের দৃশ্যমান)"
+
+msgid "Time-Based Validation"
+msgstr "সময়-ভিত্তিক যাচাইকরণ"
+
+msgid "Enable Time-Based Validation"
+msgstr "সময়-ভিত্তিক যাচাইকরণ চালু করুন"
+
+msgid "Block submissions that happen too quickly (bot behavior)."
+msgstr "খুব দ্রুত হওয়া সাবমিশন ব্লক করুন (বট আচরণ)।"
+
+msgid "Minimum Time (seconds)"
+msgstr "ন্যূনতম সময় (সেকেন্ড)"
+
+msgid "Block if form is submitted faster than this. Default: 3 seconds."
+msgstr "এর চেয়ে দ্রুত ফর্ম জমা দিলে ব্লক করুন। ডিফল্ট: ৩ সেকেন্ড।"
+
+msgid "Maximum Time (seconds)"
+msgstr "সর্বোচ্চ সময় (সেকেন্ড)"
+
+msgid "Block if form takes longer than this. Set 0 for unlimited."
+msgstr "এর চেয়ে বেশি সময় লাগলে ব্লক করুন। সীমাহীনের জন্য ০ সেট করুন।"
+
+msgid "Auto IP Blocking"
+msgstr "অটো আইপি ব্লকিং"
+
+msgid "Enable Auto IP Blocking"
+msgstr "অটো আইপি ব্লকিং চালু করুন"
+
+msgid "Automatically ban IPs that trigger honeypot multiple times."
+msgstr "হানিপট একাধিকবার ট্রিগার করা আইপি স্বয়ংক্রিয়ভাবে ব্যান করুন।"
+
+msgid "Block After X Attempts"
+msgstr "X বার চেষ্টার পর ব্লক করুন"
+
+msgid "Number of spam attempts within 24 hours before permanent ban."
+msgstr "স্থায়ী ব্যানের আগে ২৪ ঘন্টার মধ্যে স্প্যাম চেষ্টার সংখ্যা।"
+
+msgid "Log Retention"
+msgstr "লগ সংরক্ষণ"
+
+msgid "Keep Logs For"
+msgstr "লগ রাখুন"
+
+msgid "7 Days"
+msgstr "৭ দিন"
+
+msgid "14 Days"
+msgstr "১৪ দিন"
+
+msgid "30 Days"
+msgstr "৩০ দিন"
+
+msgid "60 Days"
+msgstr "৬০ দিন"
+
+msgid "90 Days"
+msgstr "৯০ দিন"
+
+msgid "Logs older than this will be automatically deleted daily."
+msgstr "এর চেয়ে পুরানো লগ প্রতিদিন স্বয়ংক্রিয়ভাবে মুছে ফেলা হবে।"
+
+msgid "Save Settings"
+msgstr "সেটিংস সেভ করুন"
+
+msgid "Field Regenerated!"
+msgstr "ফিল্ড পুনরায় তৈরি হয়েছে!"
+
+msgid "New field name:"
+msgstr "নতুন ফিল্ড নাম:"
+
+# Integrations Tab
+msgid "WordPress Core"
+msgstr "ওয়ার্ডপ্রেস কোর"
+
+msgid "WP Comments"
+msgstr "ডব্লিউপি মন্তব্য"
+
+msgid "Protect comment forms from spam bots"
+msgstr "স্প্যাম বট থেকে মন্তব্য ফর্ম সুরক্ষিত করুন"
+
+msgid "WP Registration"
+msgstr "ডব্লিউপি রেজিস্ট্রেশন"
+
+msgid "Protect user registration forms"
+msgstr "ব্যবহারকারী নিবন্ধন ফর্ম সুরক্ষিত করুন"
+
+msgid "Form Builders"
+msgstr "ফর্ম বিল্ডার"
+
+msgid "eCommerce"
+msgstr "ই-কমার্স"
+
+msgid "Membership & Community"
+msgstr "সদস্যতা ও কমিউনিটি"
+
+msgid "Email Marketing"
+msgstr "ইমেইল মার্কেটিং"
+
+msgid "Page Builders"
+msgstr "পেজ বিল্ডার"
+
+msgid "Enable or disable honeypot protection for specific form plugins. All integrations are enabled by default."
+msgstr "নির্দিষ্ট ফর্ম প্লাগইনগুলির জন্য হানিপট সুরক্ষা চালু বা বন্ধ করুন। সব ইন্টিগ্রেশন ডিফল্টভাবে চালু।"
+
+msgid "Enable All"
+msgstr "সব চালু করুন"
+
+msgid "Disable All"
+msgstr "সব বন্ধ করুন"
+
+msgid "Save Integrations"
+msgstr "ইন্টিগ্রেশন সেভ করুন"
+
+# Statistics Tab
+msgid "Spam Blocking Statistics"
+msgstr "স্প্যাম ব্লকিং পরিসংখ্যান"
+
+msgid "Overview of spam attempts blocked by honeypot protection."
+msgstr "হানিপট সুরক্ষা দ্বারা ব্লক করা স্প্যাম প্রচেষ্টার সংক্ষিপ্ত বিবরণ।"
+
+msgid "Today"
+msgstr "আজ"
+
+msgid "This Week"
+msgstr "এই সপ্তাহে"
+
+msgid "This Month"
+msgstr "এই মাসে"
+
+msgid "All Time"
+msgstr "সর্বমোট"
+
+msgid "Breakdown by Source"
+msgstr "সোর্স অনুযায়ী বিভাজন"
+
+msgid "Source"
+msgstr "সোর্স"
+
+msgid "No spam blocked yet. Statistics will appear here once honeypot catches spam."
+msgstr "এখনো কোনো স্প্যাম ব্লক হয়নি। হানিপট স্প্যাম ধরলে এখানে পরিসংখ্যান দেখা যাবে।"
+
+msgid "Reset Statistics"
+msgstr "পরিসংখ্যান রিসেট করুন"
+
+msgid "Reset Statistics?"
+msgstr "পরিসংখ্যান রিসেট করবেন?"
+
+msgid "This will reset all honeypot statistics to zero. This action cannot be undone."
+msgstr "এটি সমস্ত হানিপট পরিসংখ্যান শূন্যে রিসেট করবে। এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।"
+
+msgid "Yes, Reset"
+msgstr "হ্যাঁ, রিসেট করুন"
+
+msgid "Statistics Reset!"
+msgstr "পরিসংখ্যান রিসেট হয়েছে!"
+
+# IP Blocking Tab
+msgid "Honeypot IP Blocking"
+msgstr "হানিপট আইপি ব্লকিং"
+
+msgid "IPs that have been permanently blocked due to repeated honeypot spam attempts."
+msgstr "বারবার হানিপট স্প্যাম চেষ্টার কারণে স্থায়ীভাবে ব্লক করা আইপি।"
+
+msgid "Manually Block IP"
+msgstr "ম্যানুয়ালি আইপি ব্লক করুন"
+
+msgid "Enter IP address (e.g., 192.168.1.1)"
+msgstr "আইপি ঠিকানা লিখুন (যেমন, 192.168.1.1)"
+
+msgid "Block IP"
+msgstr "আইপি ব্লক করুন"
+
+msgid "Manually add an IP to the honeypot blocklist."
+msgstr "হানিপট ব্লকলিস্টে ম্যানুয়ালি একটি আইপি যোগ করুন।"
+
+msgid "Blocked IPs (Honeypot)"
+msgstr "ব্লক করা আইপি (হানিপট)"
+
+msgid "IP Address"
+msgstr "আইপি ঠিকানা"
+
+msgid "Blocked Date"
+msgstr "ব্লকের তারিখ"
+
+msgid "Action"
+msgstr "অ্যাকশন"
+
+msgid "Unblock"
+msgstr "আনব্লক"
+
+msgid "No IPs have been blocked by honeypot yet. IPs will appear here after hitting the spam threshold."
+msgstr "হানিপট এখনো কোনো আইপি ব্লক করেনি। স্প্যাম থ্রেশহোল্ড পার করলে আইপি এখানে দেখা যাবে।"
+
+msgid "Note:"
+msgstr "নোট:"
+
+msgid "These IPs are also visible in"
+msgstr "এই আইপিগুলো এখানেও দৃশ্যমান"
+
+msgid "Advance Security → Bot Protection → Permanent Bans"
+msgstr "অ্যাডভান্স সিকিউরিটি → বট প্রটেকশন → স্থায়ী ব্যান"
+
+msgid "Error"
+msgstr "ত্রুটি"
+
+msgid "Please enter an IP address"
+msgstr "অনুগ্রহ করে একটি আইপি ঠিকানা লিখুন"
+
+msgid "Invalid IP address format"
+msgstr "অবৈধ আইপি ঠিকানা ফরম্যাট"
+
+msgid "IP Blocked!"
+msgstr "আইপি ব্লক হয়েছে!"
+
+msgid "Failed to block IP"
+msgstr "আইপি ব্লক করতে ব্যর্থ"
+
+msgid "Unblock this IP?"
+msgstr "এই আইপি আনব্লক করবেন?"
+
+msgid "Yes, Unblock"
+msgstr "হ্যাঁ, আনব্লক করুন"
+
+msgid "IP Unblocked!"
+msgstr "আইপি আনব্লক হয়েছে!"
+
+msgid "Failed to unblock IP"
+msgstr "আইপি আনব্লক করতে ব্যর্থ"
+
+# Logs Tab
+msgid "Spam Attempt Logs"
+msgstr "স্প্যাম প্রচেষ্টার লগ"
+
+msgid "Detailed logs of spam attempts blocked by honeypot. Logs older than %d days are automatically deleted."
+msgstr "হানিপট দ্বারা ব্লক করা স্প্যাম প্রচেষ্টার বিস্তারিত লগ। %d দিনের পুরানো লগ স্বয়ংক্রিয়ভাবে মুছে যায়।"
+
+msgid "Source:"
+msgstr "সোর্স:"
+
+msgid "All Sources"
+msgstr "সব সোর্স"
+
+msgid "Reason:"
+msgstr "কারণ:"
+
+msgid "All Reasons"
+msgstr "সব কারণ"
+
+msgid "Filter"
+msgstr "ফিল্টার"
+
+msgid "Reset"
+msgstr "রিসেট"
+
+msgid "Recent Logs (Max 500)"
+msgstr "সাম্প্রতিক লগ (সর্বোচ্চ ৫০০)"
+
+msgid "Clear All Logs"
+msgstr "সব লগ মুছুন"
+
+msgid "Logs table not found. Please deactivate and reactivate the plugin to create the table."
+msgstr "লগ টেবিল পাওয়া যায়নি। টেবিল তৈরি করতে প্লাগইন ডিঅ্যাক্টিভেট এবং রিঅ্যাক্টিভেট করুন।"
+
+msgid "Reason"
+msgstr "কারণ"
+
+msgid "User Agent"
+msgstr "ইউজার এজেন্ট"
+
+msgid "Date"
+msgstr "তারিখ"
+
+msgid "No logs found. Logs will appear here when honeypot blocks spam attempts."
+msgstr "কোনো লগ পাওয়া যায়নি। হানিপট স্প্যাম ব্লক করলে এখানে লগ দেখা যাবে।"
+
+msgid "Clear All Logs?"
+msgstr "সব লগ মুছবেন?"
+
+msgid "This will permanently delete all honeypot logs. Statistics will remain unchanged."
+msgstr "এটি সমস্ত হানিপট লগ স্থায়ীভাবে মুছে ফেলবে। পরিসংখ্যান অপরিবর্তিত থাকবে।"
+
+msgid "Yes, Clear All"
+msgstr "হ্যাঁ, সব মুছুন"
+
+msgid "Logs Cleared!"
+msgstr "লগ মুছে গেছে!"
+
+msgid "Failed to clear logs"
+msgstr "লগ মুছতে ব্যর্থ"
+
+msgid "Spam detected! Your submission has been blocked."
+msgstr "স্প্যাম শনাক্ত হয়েছে! আপনার সাবমিশন ব্লক করা হয়েছে।"

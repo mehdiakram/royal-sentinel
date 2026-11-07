@@ -4,7 +4,7 @@ Tags: security, cloudflare, 2fa, optimization, hardening
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 26.11.07
+Stable tag: 26.11.08
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,11 @@ Yes, to use the Cloudflare specific features like IP List management and Custom 
 4. Performance tweaks and database optimization tools.
 
 == Changelog ==
+
+= 26.11.08 =
+* Fixed duplicate update notice after upgrading by sanitizing transient response cache.
+* Added native support for WordPress Automatic Updates (Enable/Disable auto-updates UI and background cron execution).
+* Improved dynamic version detection in updater.
 
 = 26.11.07 =
 * Migrated update server to GitHub Releases for faster and reliable automated updates.

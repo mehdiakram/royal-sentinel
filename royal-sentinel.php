@@ -2,7 +2,7 @@
 /*
 Plugin Name: Royal Sentinel
 Description: Royal Sentinel is an all-in-one security and performance optimization toolkit designed to keep your WordPress site safe and lean.
-Version: 26.11.07
+Version: 26.11.08
 Author: Royal Technologies
 Author URI: https://www.royaltechbd.com
 Requires at least: 5.8
@@ -24,7 +24,7 @@ require_once plugin_dir_path( __FILE__ ) . 'includes/database.php';
 
 if ( ! defined( 'ROYALSENTINEL_VERSION' ) ) {
     $plugin_data = get_file_data( __FILE__, array( 'version' => 'Version' ) );
-    define( 'ROYALSENTINEL_VERSION', !empty( $plugin_data['version'] ) ? $plugin_data['version'] : '26.11.07' );
+    define( 'ROYALSENTINEL_VERSION', !empty( $plugin_data['version'] ) ? $plugin_data['version'] : '26.11.08' );
 }
 
 define( 'ROYALSENTINEL_PLUGIN_FILE', __FILE__ );
@@ -143,16 +143,13 @@ require_once ROYALSENTINEL_PLUGIN_DIR . 'includes/updater.php';
  * Initialize the plugin updater.
  */
 function royal_sentinel_initialize_updater() {
-    if ( ! is_admin() ) {
-        return;
-    }
 
     if ( class_exists( 'Royal_Sentinel_Updater' ) ) {
         $update_url = 'https://raw.githubusercontent.com/mehdiakram/royal-sentinel/main/royal-sentinel.json';
         new Royal_Sentinel_Updater( ROYALSENTINEL_PLUGIN_FILE, $update_url );
     }
 }
-add_action( 'admin_init', 'royal_sentinel_initialize_updater' );
+add_action( 'init', 'royal_sentinel_initialize_updater' );
 
 /**
  * Force update check via URL parameter.

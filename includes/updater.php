@@ -30,26 +30,40 @@ class Royal_Sentinel_Updater {
         $this->plugin_file     = $plugin_file;
         $this->plugin_slug     = plugin_basename( $this->plugin_file );
         $this->update_json_url = $update_json_url;
+        $this->current_version = $this->get_current_version();
+
+        add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_update' ) );
+        add_filter( 'site_transient_update_plugins', array( $this, 'filter_update_plugins' ) );
+        add_action( 'upgrader_process_complete', array( $this, 'purge_update_cache' ), 10, 2 );
+        add_filter( 'plugins_api', array( $this, 'plugin_api_details' ), 10, 3 );
+    }
+
+    /**
+     * Get current plugin version dynamically.
+     *
+     * @return string
+     */
+    private function get_current_version() {
+        if ( defined( 'ROYALSENTINEL_VERSION' ) && ! empty( ROYALSENTINEL_VERSION ) ) {
+            return ROYALSENTINEL_VERSION;
+        }
 
         if ( ! function_exists( 'get_plugin_data' ) ) {
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
 
-        $plugin_data           = get_plugin_data( $this->plugin_file );
-        $this->current_version = $plugin_data['Version'];
-
-        add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_update' ) );
-        add_filter( 'plugins_api', array( $this, 'plugin_api_details' ), 10, 3 );
+        $plugin_data = get_plugin_data( $this->plugin_file );
+        return ! empty( $plugin_data['Version'] ) ? $plugin_data['Version'] : '1.0.0';
     }
 
     /**
-     * Check for plugin updates from the remote server.
+     * Check for plugin updates from the remote server when transient is being set.
      *
      * @param object $transient The update_plugins transient.
      * @return object Modified transient with update info if available.
      */
     public function check_for_update( $transient ) {
-        if ( empty( $transient->checked ) ) {
+        if ( ! is_object( $transient ) || empty( $transient->checked ) ) {
             return $transient;
         }
 
@@ -61,7 +75,13 @@ class Royal_Sentinel_Updater {
 
         $update_data = json_decode( wp_remote_retrieve_body( $response ) );
 
-        if ( is_object( $update_data ) && version_compare( $this->current_version, $update_data->version, '<' ) ) {
+        if ( ! is_object( $update_data ) || empty( $update_data->version ) ) {
+            return $transient;
+        }
+
+        $current_version = $this->get_current_version();
+
+        if ( version_compare( $current_version, $update_data->version, '<' ) ) {
             $assets_url   = plugin_dir_url( $this->plugin_file ) . 'assets/images/';
             $plugin_icons = ! empty( $update_data->icons ) ? (array) $update_data->icons : array(
                 '1x' => $assets_url . 'icon-128x128.png',
@@ -76,9 +96,88 @@ class Royal_Sentinel_Updater {
                 'url'         => $update_data->homepage,
                 'icons'       => $plugin_icons,
             );
+
+            if ( isset( $transient->no_update[ $this->plugin_slug ] ) ) {
+                unset( $transient->no_update[ $this->plugin_slug ] );
+            }
+        } else {
+            // Plugin is already at latest version or newer: remove from response!
+            if ( isset( $transient->response[ $this->plugin_slug ] ) ) {
+                unset( $transient->response[ $this->plugin_slug ] );
+            }
+
+            if ( ! isset( $transient->no_update ) || ! is_array( $transient->no_update ) ) {
+                $transient->no_update = array();
+            }
+
+            $transient->no_update[ $this->plugin_slug ] = (object) array(
+                'slug'        => basename( $this->plugin_slug, '.php' ),
+                'plugin'      => $this->plugin_slug,
+                'new_version' => $current_version,
+                'package'     => '',
+                'url'         => $update_data->homepage ?? '',
+            );
         }
 
         return $transient;
+    }
+
+    /**
+     * Filter the transient when retrieved to prevent cached stale update notices
+     * and ensure WordPress recognizes this plugin as update-supported (enabling Auto-Updates UI).
+     *
+     * @param object $transient
+     * @return object
+     */
+    public function filter_update_plugins( $transient ) {
+        if ( ! is_object( $transient ) ) {
+            $transient = new stdClass();
+        }
+
+        $current_version = $this->get_current_version();
+
+        // 1. If an update is marked in response, verify it is truly newer
+        if ( ! empty( $transient->response[ $this->plugin_slug ] ) ) {
+            $new_version = $transient->response[ $this->plugin_slug ]->new_version ?? '';
+
+            if ( ! empty( $new_version ) && version_compare( $current_version, $new_version, '>=' ) ) {
+                unset( $transient->response[ $this->plugin_slug ] );
+            }
+        }
+
+        // 2. If no update is pending, populate no_update so WordPress enables the "Automatic Updates" column UI
+        if ( empty( $transient->response[ $this->plugin_slug ] ) ) {
+            if ( ! isset( $transient->no_update ) || ! is_array( $transient->no_update ) ) {
+                $transient->no_update = array();
+            }
+
+            if ( ! isset( $transient->no_update[ $this->plugin_slug ] ) ) {
+                $transient->no_update[ $this->plugin_slug ] = (object) array(
+                    'id'          => $this->plugin_slug,
+                    'slug'        => basename( $this->plugin_slug, '.php' ),
+                    'plugin'      => $this->plugin_slug,
+                    'new_version' => $current_version,
+                    'url'         => 'https://github.com/mehdiakram/royal-sentinel',
+                    'package'     => '',
+                );
+            }
+        }
+
+        return $transient;
+    }
+
+    /**
+     * Purge update cache after plugin has been upgraded.
+     *
+     * @param WP_Upgrader $upgrader
+     * @param array       $options
+     */
+    public function purge_update_cache( $upgrader, $options ) {
+        if ( isset( $options['action'], $options['type'] ) && 'update' === $options['action'] && 'plugin' === $options['type'] ) {
+            if ( isset( $options['plugins'] ) && in_array( $this->plugin_slug, (array) $options['plugins'], true ) ) {
+                delete_site_transient( 'update_plugins' );
+            }
+        }
     }
 
     /**

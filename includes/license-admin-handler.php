@@ -99,6 +99,7 @@ function rs_ajax_activate_license() {
     update_option( 'royalsentinel_license_cache',       $data );
     update_option( 'royalsentinel_license_status',      'active' );
     update_option( 'royalsentinel_license_last_check',  gmdate( 'Y-m-d H:i:s' ) );
+    update_option( 'royalsentinel_license_version',     (int) ( $data['license_data']['version'] ?? 1 ) );
 
     // Store encrypted expiry for offline fallback (non-lifetime licenses)
     $expiresAt = $data['license_data']['expires_at'] ?? null;

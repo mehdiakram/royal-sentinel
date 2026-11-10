@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'RS_LICENSE_SOFTWARE',      'royalsentinel' );
 define( 'RS_LICENSE_PUBLIC_KEY',    'vE7PkX4ho5A4ZVWH5KwToDcv1cPIY6FJsNU4tDjbNIw=' );
 define( 'RS_LICENSE_VERIFY_URL',    'https://auth.royaltechbd.com/api/verify' );
+define( 'RS_LICENSE_VERSION_URL',   'https://auth.royaltechbd.com/api/license/version' );
 define( 'RS_LICENSE_ACTIVITY_URL',  'https://auth.royaltechbd.com/activities' );
 
 // ============================================================
@@ -248,6 +249,38 @@ function royalsentinel_cron_license_ping() {
         return;
     }
 
+    $localCache = get_option( 'royalsentinel_license_cache', [] );
+    $localValid = ! empty( $localCache ) ? royalsentinel_verify_license_cache( $localCache ) : false;
+
+    // ── 1. Lightweight Version Check (GET, ~50 bytes) ──────────────────
+    // If local cache is valid, check if the server has a newer version.
+    // If version hasn't changed, skip heavy POST /api/verify completely!
+    if ( $localValid ) {
+        $cachedVersion = (int) get_option( 'royalsentinel_license_version', 0 );
+        $versionUrl    = add_query_arg( [
+            'k' => $saved_license,
+            's' => RS_LICENSE_SOFTWARE,
+            'v' => $cachedVersion,
+        ], RS_LICENSE_VERSION_URL );
+
+        $vResponse = wp_remote_get( $versionUrl, [
+            'timeout'   => 5,
+            'sslverify' => false,
+        ] );
+
+        if ( ! is_wp_error( $vResponse ) && wp_remote_retrieve_response_code( $vResponse ) === 200 ) {
+            $vData = json_decode( wp_remote_retrieve_body( $vResponse ), true );
+            if ( isset( $vData['version'] ) ) {
+                update_option( 'royalsentinel_license_version', $vData['version'] );
+            }
+            if ( ! ( $vData['changed'] ?? false ) ) {
+                // Version hasn't changed and license is active — nothing to do! ✅
+                return;
+            }
+        }
+        // If version check failed or timed out, keep localValid as true and trust local cache
+    }
+
     // Determine domain
     $host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? home_url();
     $host = parse_url( $host, PHP_URL_HOST ) ?: $host;
@@ -265,7 +298,7 @@ function royalsentinel_cron_license_ping() {
         $wp_version, PHP_VERSION, $theme_name, home_url()
     );
 
-    // --- HTTP POST to auth server (Guide Step 4) ---
+    // ── 2. Full Sync (POST /api/verify) ────────────────────────────────
     $response = wp_remote_post( RS_LICENSE_VERIFY_URL, [
         'timeout'    => 15,
         'user-agent' => $user_agent,
@@ -279,9 +312,6 @@ function royalsentinel_cron_license_ping() {
 
     // Server unreachable — fall back to local cache (Guide Step 4 fallback)
     if ( is_wp_error( $response ) ) {
-        $localCache = get_option( 'royalsentinel_license_cache', [] );
-        $localValid = ! empty( $localCache ) ? royalsentinel_verify_license_cache( $localCache ) : false;
-
         if ( ! $localValid ) {
             // Last resort: encrypted expiry for offline grace (non-lifetime licenses)
             $encExpiry = get_option( 'royalsentinel_license_expiry_enc' );
@@ -295,17 +325,39 @@ function royalsentinel_cron_license_ping() {
                     return;
                 }
             }
-            // No expiry = lifetime license; allow offline forever
         }
         return; // Keep current status as-is
     }
 
-    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    $statusCode = wp_remote_retrieve_response_code( $response );
+    $body       = json_decode( wp_remote_retrieve_body( $response ), true );
+
+    // Server 5xx error — server misconfiguration or downtime, TRUST LOCAL CACHE!
+    if ( $statusCode >= 500 ) {
+        return; // Do not touch status or cache!
+    }
 
     // Server explicitly rejected the license
     if ( isset( $body['success'] ) && $body['success'] === false ) {
+        $msg = $body['message'] ?? '';
+        $definitelyInvalid = stripos( $msg, 'suspended' ) !== false ||
+                             stripos( $msg, 'expired' ) !== false   ||
+                             stripos( $msg, 'invalid' ) !== false   ||
+                             stripos( $msg, 'blocked' ) !== false   ||
+                             $statusCode === 403                    ||
+                             $statusCode === 404;
+
+        if ( $definitelyInvalid ) {
+            update_option( 'royalsentinel_license_status', 'inactive' );
+            delete_option( 'royalsentinel_license_cache' );
+            return;
+        }
+
+        // Ambiguous rejection and we have valid local cache — keep working
+        if ( $localValid ) {
+            return;
+        }
         update_option( 'royalsentinel_license_status', 'inactive' );
-        delete_option( 'royalsentinel_license_cache' );
         return;
     }
 
@@ -324,6 +376,9 @@ function royalsentinel_cron_license_ping() {
         update_option( 'royalsentinel_license_cache',      $body );
         update_option( 'royalsentinel_license_last_check', gmdate( 'Y-m-d H:i:s' ) );
         update_option( 'royalsentinel_license_status',     'active' );
+        if ( isset( $body['license_data']['version'] ) ) {
+            update_option( 'royalsentinel_license_version', (int) $body['license_data']['version'] );
+        }
 
         // Store encrypted expiry for offline fallback (non-lifetime licenses)
         $expiresAt = $body['license_data']['expires_at'] ?? null;
